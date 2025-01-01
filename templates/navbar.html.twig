@@ -1,0 +1,73 @@
+<style>
+	/* General reset */
+	body {
+		margin: 0;
+		font-family: Arial, sans-serif;
+	}
+
+	nav {
+		background-color: #333; /* Dark background for the navbar */
+		padding: 10px 20px;
+	}
+
+	nav ul {
+		list-style: none; /* Remove bullets */
+		margin: 0;
+		padding: 0;
+		display: flex; /* Arrange items horizontally */
+		justify-content: flex-end; /* Align items to the right */
+	}
+
+	nav ul li {
+		margin-left: 20px; /* Add spacing between items */
+	}
+
+	nav ul li a {
+		text-decoration: none; /* Remove underline */
+		color: #fff; /* White text */
+		padding: 10px 15px; /* Add padding for better click area */
+		border-radius: 5px; /* Rounded corners */
+		transition: background-color 0.3s ease; /* Smooth hover effect */
+	}
+
+	nav ul li a:hover {
+		background-color: #555; /* Lighter shade on hover */
+	}
+
+	/* Responsive design for smaller screens */
+	@media(max-width: 600px) {
+		nav ul {
+			flex-direction: column; /* Stack items vertically */
+			align-items: flex-start; /* Align items to the left */
+		}
+
+		nav ul li {
+			margin-left: 0; /* Remove left margin */
+			margin-bottom: 10px; /* Add spacing between vertical items */
+		}
+	}
+</style>
+<nav>
+	<ul>
+		<li>
+			<a href="/">Home</a>
+		</li>
+		<li>
+			<a href="product">Products</a>
+		</li>
+		{% if not is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+			<li>
+				<a href="login">Login</a>
+			</li>
+			<li>
+				<a href="login">Register</a>
+			</li>
+		{% endif %}
+		{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+
+			<li>
+				<a href="logout">Logout</a>
+			</li>
+		{% endif %}
+	</ul>
+</nav>
