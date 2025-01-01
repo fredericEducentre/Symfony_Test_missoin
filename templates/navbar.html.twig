@@ -52,9 +52,6 @@
 		<li>
 			<a href="/">Home</a>
 		</li>
-		<li>
-			<a href="product">Products</a>
-		</li>
 		{% if not is_granted('IS_AUTHENTICATED_REMEMBERED') %}
 			<li>
 				<a href="login">Login</a>
@@ -64,7 +61,12 @@
 			</li>
 		{% endif %}
 		{% if is_granted('IS_AUTHENTICATED_FULLY') %}
-
+			<li>
+				<a href="product">Products</a>
+			</li>
+			<li>
+				<a href="article">Articles</a>
+			</li>
 			<li>
 				<a href="logout">Logout</a>
 			</li>

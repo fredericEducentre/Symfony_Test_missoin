@@ -4,7 +4,61 @@
 {% endblock %}
 
 {% block body %}
-<ul>
-    <li><a href="product">Products</a></li>
-</ul>
+	<style>
+		section {
+			font-family: Arial, sans-serif;
+			background-color: #f4f4f9;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			min-height: 100vh;
+			margin: 0;
+		}
+		/* Card container */
+		.card-container {
+			display: flex;
+			gap: 20px;
+		}
+
+		/* Individual cards */
+		.card {
+			background-color: #ffffff;
+			border-radius: 10px;
+			box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+			transition: transform 0.2s ease, box-shadow 0.2s ease;
+			width: 150px;
+			text-align: center;
+			padding: 20px;
+		}
+
+		/* Hover effect on cards */
+		.card:hover {
+			transform: translateY(-5px);
+			box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+		}
+
+		/* Card links */
+		.card-link {
+			text-decoration: none;
+			color: #333;
+			font-weight: bold;
+			font-size: 16px;
+			display: block;
+			padding: 10px;
+		}
+
+		.card-link:hover {
+			color: #007bff;
+		}
+	</style>
+	<section>
+		<div class="card-container">
+			<div class="card">
+				<a href="product" class="card-link">Products</a>
+			</div>
+			<div class="card">
+				<a href="article" class="card-link">Articles</a>
+			</div>
+		</div>
+	</section>
 {% endblock %}
