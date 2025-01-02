@@ -44,9 +44,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Comment::class, mappedBy: 'user_id')]
     private Collection $comments;
 
+    /**
+     * @var Collection<int, Notation>
+     */
+    #[ORM\OneToMany(targetEntity: Notation::class, mappedBy: 'user_id')]
+    private Collection $notations;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
+        $this->notations = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -159,6 +166,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($comment->getUserId() === $this) {
                 $comment->setUserId(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Notation>
+     */
+    public function getNotations(): Collection
+    {
+        return $this->notations;
+    }
+
+    public function addNotation(Notation $notation): static
+    {
+        if (!$this->notations->contains($notation)) {
+            $this->notations->add($notation);
+            $notation->setUserId($this);
+        }
+
+        return $this;
+    }
+
+    public function removeNotation(Notation $notation): static
+    {
+        if ($this->notations->removeElement($notation)) {
+            // set the owning side to null (unless already changed)
+            if ($notation->getUserId() === $this) {
+                $notation->setUserId(null);
             }
         }
 
