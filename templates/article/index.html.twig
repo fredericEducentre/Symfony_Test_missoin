@@ -1,37 +1,48 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Article index{% endblock %}
+{% block title %}Article index
+{% endblock %}
 
 {% block body %}
-    <h1>Article index</h1>
+	<h1>Article index</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Details</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for article in articles %}
-            <tr>
-                <td>{{ article.id }}</td>
-                <td>{{ article.name }}</td>
-                <td>{{ article.details }}</td>
-                <td>
-                    <a href="{{ path('app_article_show', {'id': article.id}) }}">show</a>
-                    <a href="{{ path('app_article_edit', {'id': article.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="4">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Name</th>
+				<th>Details</th>
+				<th>Comments</th>
+				<th>actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for article in articles %}
+				<tr>
+					<td>{{ article.id }}</td>
+					<td>{{ article.name }}</td>
+					<td>{{ article.details }}</td>
+					<td>
+						<ul>
+							{% for comment in article.comments %}
+								<li>{{comment.comment_text}}</li>
+							{% endfor %}
+						</ul>
+					</td>
+					<td>
+						<a href="{{ path('app_article_show', {'id': article.id}) }}">show</a>
+						<a href="{{ path('app_article_edit', {'id': article.id}) }}">edit</a>
+						<a href="{{ path('app_comment_new') }}">Add comment</a>
+					</td>
+				</tr>
 
-    <a href="{{ path('app_article_new') }}">Create new</a>
+			{% else %}
+				<tr>
+					<td colspan="4">no records found</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+	<a href="{{ path('app_article_new') }}">Create new</a>
 {% endblock %}
