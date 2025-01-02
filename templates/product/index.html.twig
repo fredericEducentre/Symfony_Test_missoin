@@ -4,45 +4,120 @@
 {% endblock %}
 
 {% block body %}
+	<style>
+		.container {
+			max-width: 800px;
+			margin: 0 auto;
+			font-family: Arial, sans-serif;
+		}
 
-	<h1>Product index</h1>
+		.container h1 {
+			text-align: center;
+			color: #333;
+			margin-bottom: 20px;
+		}
 
-	<table class="table">
-		<thead>
-			<tr>
-				<th>Id</th>
-				<th>Name</th>
-				<th>Price</th>
-				<th>Notations</th>
-				<th>actions</th>
-			</tr>
-		</thead>
-		<tbody>
-			{% for product in products %}
+		.container table {
+			width: 100%;
+			border-collapse: collapse;
+			margin-bottom: 20px;
+		}
+
+		.container table th,
+		.container table td {
+			border: 1px solid #ccc;
+			padding: 10px;
+			text-align: left;
+		}
+
+		.container table th {
+			background-color: #f4f4f4;
+			color: #333;
+		}
+
+		.container table tr:nth-child(even) {
+			background-color: #f9f9f9;
+		}
+
+		.container ul {
+			padding: 0;
+			list-style: none;
+		}
+
+		.container ul li {
+			background-color: #e0e7ff;
+			color: #333;
+			padding: 5px;
+			border-radius: 3px;
+			margin-bottom: 5px;
+		}
+
+		.container a {
+			text-decoration: none;
+			color: #0066cc;
+			font-weight: bold;
+			margin-right: 10px;
+		}
+
+		.container a:hover {
+			color: #004a99;
+		}
+
+		.container .create-link {
+			display: inline-block;
+			padding: 10px 15px;
+			background-color: #4CAF50;
+			color: #fff;
+			text-decoration: none;
+			border-radius: 5px;
+			margin-top: 20px;
+		}
+
+		.container .create-link:hover {
+			background-color: #45a049;
+		}
+	</style>
+
+	<div class="container">
+		<h1>Product Index</h1>
+
+		<table>
+			<thead>
 				<tr>
-					<td>{{ product.id }}</td>
-					<td>{{ product.name }}</td>
-					<td>{{ product.price }}</td>
-					<td>
-						<ul>
-							{% for notation in product.notations %}
-								<li>{{notation.note}}</li>
-							{% endfor %}
-						</ul>
-					</td>
-					<td>
-						<a href="{{ path('app_product_show', {'id': product.id}) }}">show</a>
-						<a href="{{ path('app_product_edit', {'id': product.id}) }}">edit</a>
-                        <a href="{{ path('app_notation_new') }}">Add a note</a>
-					</td>
+					<th>#</th>
+					<th>Name</th>
+					<th>Price</th>
+					<th>Notations</th>
+					<th>Actions</th>
 				</tr>
-			{% else %}
-				<tr>
-					<td colspan="4">no records found</td>
-				</tr>
-			{% endfor %}
-		</tbody>
-	</table>
+			</thead>
+			<tbody>
+				{% for product in products %}
+					<tr>
+						<td>{{ product.id }}</td>
+						<td>{{ product.name }}</td>
+						<td>${{ product.price|number_format(2, '.', ',') }}</td>
+						<td>
+							<ul>
+								{% for notation in product.notations %}
+									<li>{{ notation.note }}</li>
+								{% endfor %}
+							</ul>
+						</td>
+						<td>
+							<a href="{{ path('app_product_show', {'id': product.id}) }}">Show</a>
+							<a href="{{ path('app_product_edit', {'id': product.id}) }}">Edit</a>
+							<a href="{{ path('app_notation_new') }}">Add a Note</a>
+						</td>
+					</tr>
+				{% else %}
+					<tr>
+						<td colspan="5" style="text-align: center; color: #888;">No records found</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
 
-	<a href="{{ path('app_product_new') }}">Create new</a>
+		<a href="{{ path('app_product_new') }}" class="create-link">Create New</a>
+	</div>
 {% endblock %}

@@ -4,7 +4,92 @@
 {% endblock %}
 
 {% block body %}
-	<h1>Article index</h1>
+	<style>
+		.main-title {
+			text-align: center;
+			margin: 20px 0;
+			color: #444;
+		}
+
+		.table {
+			width: 90%;
+			margin: 20px auto;
+			border-collapse: collapse;
+			background: white;
+			box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+		}
+
+		.table th,
+		.table td {
+			padding: 10px;
+			text-align: left;
+			border-bottom: 1px solid #ddd;
+		}
+
+		.table th {
+			background-color: #f4f4f4;
+			color: #333;
+		}
+
+		.table tr:hover {
+			background-color: #f1f1f1;
+		}
+
+		.link {
+			text-decoration: none;
+			color: #007BFF;
+		}
+
+		.link:hover {
+			text-decoration: underline;
+		}
+
+		.list {
+			padding-left: 20px;
+			margin: 0;
+			list-style-type: disc;
+		}
+
+		.no-records {
+			text-align: center;
+			font-style: italic;
+			color: #777;
+		}
+
+		.btn {
+			display: inline-block;
+			padding: 8px 15px;
+			margin: 20px auto;
+			color: #fff;
+			background-color: #28a745;
+			border: none;
+			border-radius: 4px;
+			text-align: center;
+			cursor: pointer;
+		}
+
+		.btn:hover {
+			background-color:rgb(34, 133, 57);
+		}
+
+		a{
+			text-decoration: none;
+		}
+
+		.actions .action-link {
+			padding: 5px 10px;
+			background-color: #0056b3;
+			color: white;
+			border-radius: 3px;
+			display: flex;
+			margin: 10px;
+		}
+
+		.actions .action-link:hover {
+			background-color:rgb(0, 57, 117);
+		}
+	</style>
+	<h1 class="main-title">Article Index</h1>
 
 	<table class="table">
 		<thead>
@@ -13,7 +98,7 @@
 				<th>Name</th>
 				<th>Details</th>
 				<th>Comments</th>
-				<th>actions</th>
+				<th>Actions</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -23,26 +108,27 @@
 					<td>{{ article.name }}</td>
 					<td>{{ article.details }}</td>
 					<td>
-						<ul>
+						<ul class="list">
 							{% for comment in article.comments %}
-								<li>{{comment.comment_text}}</li>
+								<li>{{ comment.comment_text }}</li>
 							{% endfor %}
 						</ul>
 					</td>
-					<td>
-						<a href="{{ path('app_article_show', {'id': article.id}) }}">show</a>
-						<a href="{{ path('app_article_edit', {'id': article.id}) }}">edit</a>
-						<a href="{{ path('app_comment_new') }}">Add comment</a>
+					<td class="actions">
+						<a href="{{ path('app_article_show', {'id': article.id}) }}" class="action-link">Show</a>
+						<a href="{{ path('app_article_edit', {'id': article.id}) }}" class="action-link">Edit</a>
+						<a href="{{ path('app_comment_new') }}" class="action-link">Add Comment</a>
 					</td>
 				</tr>
-
 			{% else %}
 				<tr>
-					<td colspan="4">no records found</td>
+					<td colspan="5" class="no-records">No records found</td>
 				</tr>
 			{% endfor %}
 		</tbody>
 	</table>
 
-	<a href="{{ path('app_article_new') }}">Create new</a>
+	<div style="text-align: center;">
+		<a href="{{ path('app_article_new') }}" class="btn">Create New</a>
+	</div>
 {% endblock %}
