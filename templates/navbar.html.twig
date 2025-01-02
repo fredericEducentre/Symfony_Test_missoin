@@ -54,21 +54,24 @@
 		</li>
 		{% if not is_granted('IS_AUTHENTICATED_REMEMBERED') %}
 			<li>
-				<a href="login">Login</a>
+				<a href="/login">Login</a>
 			</li>
 			<li>
-				<a href="login">Register</a>
+				<a href="/register">Register</a>
 			</li>
 		{% endif %}
 		{% if is_granted('IS_AUTHENTICATED_FULLY') %}
 			<li>
-				<a href="product">Products</a>
+				<a href="/product">Products</a>
 			</li>
 			<li>
-				<a href="article">Articles</a>
+				<a href="/article">Articles</a>
 			</li>
 			<li>
-				<a href="logout">Logout</a>
+				<a href="/fortunedice">Fortune dice</a>
+			</li>
+			<li>
+				<a href="/logout">Logout</a>
 			</li>
 		{% endif %}
 	</ul>
